@@ -1,0 +1,193 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>registration</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/index.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/female.css' %}">
+    <style type = 'text/css'>
+        body{
+            background-color:#000033;
+        }
+        ul{
+            list-style-type:none;
+            font-size:1.2em;
+            color:black;
+            overflow:hidden;
+            margin-top:-7.8px;
+        }
+        li{
+            float:right;
+            margin-right:4%;
+            padding:13px;
+            display:block;
+            font-size:1em;
+        }
+        li a{
+            color:white;
+            text-decoration:none;
+            text-shadow:0px 0px 1px white,0px 0px 1px white;
+            blur:9px;
+            transition:0.7s;
+        }
+        li a:hover{
+            padding:8px;
+            border-radius:10px;
+            transition:0.7s;
+            border:3px solid white;
+            border-shadow:0px 0px 5px white,0px 0px 5px white;
+        }
+        .active{
+            color:black;
+            padding:6px;
+            background-color:white;
+            border:3px solid white;
+            border-radius:10px;
+            border-shadow:0px 0px 5px black,0px 0px 5px black;
+        }
+    </style>
+</head>
+<body>
+    <div class = 'title'>Miryalaguda voter lists</div><br>
+    <div class = 'wards'>Wards - 1,2,3,4,5 </div><br>
+    <ul>
+        <li><a href='female'>show all</a></li>
+        <li><a href='/'>Add member</a></li>
+        <li><a href='#' class= 'active'>find member</a></li><br><br><hr>
+    </ul>
+    <button id= 'total_box1' class = 'total_box1'><div class = 'ma'>Male: </div><div class = 'ma1'>{{m1}}</div></button></br><br>
+    <button id= 'total_box2' class = 'total_box2'><div class = 'fe'>Female: </div><div class = 'fe1'>{{female}}</div></button></a>
+    <input type='search' id = 'search' placeholder ='    Enter voter id/full name' class = 'search' name = 'search' autofocus>
+    <input type='submit' id='submit_search' class='submit_search' value='search'>
+    <div class='jinja' id='search_data'></div>
+    <div class = 'grid_view'>
+            
+    </div>
+    <div class = 'mtc' hidden><div class='mtctxt'></div></div>
+    <script>
+        $(document).ready(function(){
+            $('#total_box1').click(function(e){
+                e.preventDefault()
+                $.ajax({
+                    async: true,
+                    type: 'GET',
+                    url: 'total_male',
+                    dataType: 'json',
+                    success: function(data) {
+                        var i = 0;
+                        $.each(data,function(index,da){
+                            var $div = $("<div>", {"id": "foo"+i, "class": "grid_item"});
+                            $(".grid_view").append($div);
+                            var $e1 = "<span class= 'nn'>Name: </span> <div class = 'e_item1' id = 'search_name'></div><br><br>";
+                            var $e2 = "<span class= 'nn'>Father/Husband: </span><div class = 'e_item2' id = 'search_father'></div><br><br>";
+                            var $e3 = "<span class= 'nn'>Age: </span><div class = 'e_item3' id = 'search_age'></div><br><br>";
+                            var $e4 = "<span class= 'nn'>Door n.o: </span><div class = 'e_item4' id = 'search_gender'></div><br><br>";
+                            var $e5 = "<span class= 'nn'>Gender: </span><div class = 'e_item5' id = 'search_door'></div><br><br>";
+                            var $e6 = "<span class= 'nn'>Voter id: </span><div class = 'e_item6' id = 'search_id'></div><br><br>";
+                            $('#foo'+i).append($e1,$e2,$e3,$e4,$e5,$e6);  
+                            $('#foo'+i+'> #search_name').text(da[0]);
+                            $('#foo'+i+'> #search_father').text(da[1]);
+                            $('#foo'+i+'> #search_age').text(da[2]);
+                            $('#foo'+i+'> #search_gender').text(da[4]);
+                            $('#foo'+i+'> #search_door').text(da[3]);
+                            $('#foo'+i+'> #search_id').text(da[5]);
+                            i++;
+                        $('#total_box1').off('click');
+                        });
+                    },
+                    error: function() {
+                        console.log('error in sending');
+                    }
+                });
+            });
+
+            $('#total_box2').click(function(e){
+                e.preventDefault()
+                $.ajax({
+                    async: true,
+                    type: 'GET',
+                    url: 'total_female',
+                    dataType: 'json',
+                    success: function(data) {
+                        var i = 0;
+                        $.each(data,function(index,da){
+                            var $div = $("<div>", {"id": "foo"+i, "class": "grid_item"});
+                            $(".grid_view").append($div);
+                            var $e1 = "<span class= 'nn'>Name: </span> <div class = 'e_item1' id = 'search_name'></div><br><br>";
+                            var $e2 = "<span class= 'nn'>Husband/Father: </span><div class = 'e_item2' id = 'search_husband'></div><br><br>";
+                            var $e3 = "<span class= 'nn'>Age: </span><div class = 'e_item3' id = 'search_age'></div><br><br>";
+                            var $e4 = "<span class= 'nn'>Door n.o: </span><div class = 'e_item4' id = 'search_gender'></div><br><br>";
+                            var $e5 = "<span class= 'nn'>Gender: </span><div class = 'e_item5' id = 'search_door'></div><br><br>";
+                            var $e6 = "<span class= 'nn'>Voter id: </span><div class = 'e_item6' id = 'search_id'></div><br><br>";
+                            $('#foo'+i).append($e1,$e2,$e3,$e4,$e5,$e6);  
+                            $('#foo'+i+'> #search_name').text(da[0]);
+                            $('#foo'+i+'> #search_husband').text(da[1]);
+                            $('#foo'+i+'> #search_age').text(da[2]);
+                            $('#foo'+i+'> #search_gender').text(da[4]);
+                            $('#foo'+i+'> #search_door').text(da[3]);
+                            $('#foo'+i+'> #search_id').text(da[5]);
+                            i++;
+                        $('#total_box2').off('click');
+                        });
+                    },
+                    error: function() {
+                        console.log('error in sending');
+                    }
+                });
+            });
+
+            $('#submit_search').click(function(e) {
+                e.preventDefault()
+                var token = '{{csrf_token}}';
+                $.ajax({
+                    async: true,
+                    headers: {
+                        "X-CSRFToken": token
+                    },
+                    type: 'POST',
+                    url: 'search',
+                    dataType: 'json',
+                    data: {
+                        'search'    :   $('#search').val()
+                    },
+                    success: function(data) {
+                        if (data == 'voter id not found in database' || data == 'name not found in database'){
+                            alert(data);
+                        }else{
+                            var i = 0;
+                            $.each(data,function(index,da){
+                                var $div = $("<div>", {"id": "foo"+i, "class": "grid_item"});
+                                $(".grid_view").append($div);
+                                var $e1 = "<span class= 'nn'>Name: </span> <div class = 'e_item1' id = 'search_name'></div><br><br>";
+                                var $e2 = "<span class= 'nn'>Father: </span><div class = 'e_item2' id = 'search_father'></div><br><br>";
+                                var $e3 = "<span class= 'nn'>Age: </span><div class = 'e_item3' id = 'search_age'></div><br><br>";
+                                var $e4 = "<span class= 'nn'>Door n.o: </span><div class = 'e_item4' id = 'search_gender'></div><br><br>";
+                                var $e5 = "<span class= 'nn'>Gender: </span><div class = 'e_item5' id = 'search_door'></div><br><br>";
+                                var $e6 = "<span class= 'nn'>Voter id: </span><div class = 'e_item6' id = 'search_id'></div><br><br>";
+                                $('#foo'+i).append($e1,$e2,$e3,$e4,$e5,$e6);  
+                                $('#foo'+i+'> #search_name').text(da[0]);
+                                $('#foo'+i+'> #search_father').text(da[1]);
+                                $('#foo'+i+'> #search_age').text(da[2]);
+                                $('#foo'+i+'> #search_gender').text(da[4]);
+                                $('#foo'+i+'> #search_door').text(da[3]);
+                                $('#foo'+i+'> #search_id').text(da[5]);
+                                i++;
+                            $('.mtctxt').text(i+' matched');
+                            $('.mtc').show();
+                            });
+                        }
+                    },
+                    error: function() {
+                        console.log('error in sending');
+                    }
+                });
+            });
+        });
+     </script>
+</body>
+</html>

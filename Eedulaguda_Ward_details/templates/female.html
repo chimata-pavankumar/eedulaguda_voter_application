@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>registration</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/index.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/female.css' %}">
+    <style type = 'text/css'>
+        body{
+            background-color:#000033;
+        }
+        ul{
+            list-style-type:none;
+            font-size:1.2em;
+            color:black;
+            overflow:hidden;
+            margin-top:-7.8px;
+        }
+        li{
+            float:right;
+            margin-right:4%;
+            padding:13px;
+            display:block;
+            font-size:1em;
+        }
+        li a{
+            color:white;
+            text-decoration:none;
+            text-shadow:0px 0px 1px white,0px 0px 1px white;
+            blur:9px;
+            transition:0.7s;
+        }
+        li a:hover{
+            padding:8px;
+            border-radius:10px;
+            transition:0.7s;
+            border:3px solid white;
+            border-shadow:0px 0px 5px white,0px 0px 5px white;
+        }
+        .active{
+            color:black;
+            padding:6px;
+            background-color:white;
+            border:3px solid white;
+            border-radius:10px;
+            border-shadow:0px 0px 5px black,0px 0px 5px black;
+        }
+    </style>
+</head>
+<body>
+    <div class = 'title'>Miryalaguda voter lists</div><br>
+    <div class = 'wards'>Wards - 1,2,3,4,5 </div><br>
+    <ul>
+        <li><a href='#' class= 'active'>show all</a></li>
+        <li><a href='/'>Add member</a></li>
+        <li><a href='find'>find member</a></li><br><br><hr>
+    </ul>
+    <div class='total' id='total'><div class='total_txt'>Fetched: {{total}}</div></div>
+    <div class = 'grid_view'>
+    {% for mi in m %}
+            <div class = 'grid_item'>
+                <span class= 'nn'>Name: </span> <div class = 'e_item1'>{{mi.name}}</div><br><br>
+                <span class= 'nn'>Father: </span><div class = 'e_item2'>{{mi.father_name}}</div><br><br>
+                <span class= 'nn'>Age: </span><div class = 'e_item3'>{{mi.age}}</div><br><br>
+                <span class= 'nn'>Door n.o: </span><div class = 'e_item4'>{{mi.door_no}}</div><br><br>
+                <span class= 'nn'>Gender: </span><div class = 'e_item5'>{{mi.gender}}</div><br><br>
+                <span class= 'nn'>Voter id: </span><div class = 'e_item6'>{{mi.voter_id}}</div><br><br>
+            </div>
+    {% endfor %}
+    {% for mi in w %}
+            <div class = 'grid_item'>
+                <span class= 'nn'>Name: </span> <div class = 'e_item1'>{{mi.name}}</div><br><br>
+                <span class= 'nn'>Husband: </span><div class = 'e_item2'>{{mi.husband_name}}</div><br><br>
+                <span class= 'nn'>Age: </span><div class = 'e_item3'>{{mi.age}}</div><br><br>
+                <span class= 'nn'>Door n.o: </span><div class = 'e_item4'>{{mi.door_no}}</div><br><br>
+                <span class= 'nn'>Gender: </span><div class = 'e_item5'>{{mi.gender}}</div><br><br>
+                <span class= 'nn'>Voter id: </span><div class = 'e_item6'>{{mi.voter_id}}</div><br><br>
+            </div>
+    {% endfor %}
+    </div>
+</body>
+</html>

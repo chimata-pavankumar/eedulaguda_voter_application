@@ -1,0 +1,242 @@
+.title{
+     font-size: 2em;
+     font-weight: bold;
+     color : white;
+    text-align: center;
+}
+
+
+.wards{
+     font-size: 1em;
+     font-weight: bold;
+     color:white;
+     text-align: center;
+}
+
+
+.male{
+     margin-left: 8%;
+     width: 100px;
+     height: 30px;
+     border: 2px solid;
+     color:white;
+     cursor: pointer;
+     background:none;
+     border-radius: 20px;
+     -webkit-border-radius: 20px;
+     -moz-border-radius: 20px;
+     -ms-border-radius: 20px;
+     -o-border-radius: 20px;
+     outline: none;
+     transition: .4s;
+     -webkit-transition: .4s;
+     -moz-transition: .4s;
+     -ms-transition: .4s;
+     -o-transition: .4s;
+     position: absolute;
+}
+
+.submit{
+     width:18%;
+     height:34px;
+     font-weight: bold;
+     font-size: large;
+     background: none;
+     color:white;
+     border-radius: 10px;
+     -webkit-border-radius: 10px;
+     -moz-border-radius: 10px;
+     -ms-border-radius: 10px;
+     -o-border-radius: 10px;
+     outline: none;
+     border:2px solid white;
+}
+.submit:hover{
+     box-shadow: 0px 0px 2px white,0px 0px 2px white,0px 0px 2px white;
+     text-shadow: 0px 0px 1px white,0px 0px 1px white,0px 0px 1px white;
+}
+
+.male:hover{
+     transition: .4s;
+     width:120px;
+     height:40px;
+     -webkit-transition: .4s;
+     -moz-transition: .4s;
+     -ms-transition: .4s;
+     -o-transition: .4s;
+}
+.add:hover{
+     transition: .4s;
+     width:120px;
+     height:40px;
+}
+.add{
+     transition: .4s;
+     position: absolute;
+     margin-left: 70%;
+     outline: none;
+     margin-top:2%;
+     width: 130px;
+     height: 40px;
+     border: 2px solid;
+     color:white;
+     cursor: pointer;
+     background:none;
+     border-radius: 20px;
+     -webkit-border-radius: 20px;
+     -moz-border-radius: 20px;
+     -ms-border-radius: 20px;
+     -o-border-radius: 20px;
+}
+a{
+     text-decoration: none;
+     color:white;
+     font-weight: bold;
+}
+
+.form{
+     margin-top: 5%;
+     margin-left: 8%;
+}
+
+.hidey{
+     position:absolute;
+     width:30%;
+     height:300px;
+     border:2px solid white;
+     margin-left:50%;
+     margin-top:-25%;
+     background-color:black;
+     box-shadow: 0px 0px 10px white,0px 0px 10px white,0px 0px 10px white,0px 0px 10px white,0px 0px 10px white,0px 0px 10px white;
+     border-radius:10px;
+     -webkit-border-radius:10px;
+     -moz-border-radius:10px;
+     -ms-border-radius:10px;
+     -o-border-radius:10px;
+}
+
+.tname{
+     margin-top:30px;
+     color:white;
+     font-weight: bold;
+     font-size: 1.3em;
+     margin-left: 20px;
+     margin-bottom: 15px;
+}
+.tfather_name{
+     color:white;
+     font-weight: bold;
+     font-size: 1.3em;
+     margin-left: 20px;
+     margin-bottom: 15px;
+}
+.tage{
+     color:white;
+     margin-bottom: 15px;
+     font-weight: bold;
+     font-size: 1.3em;
+     margin-left: 20px;
+}
+.tvoter{
+     color:white;
+     font-weight: bold;
+     font-size: 1.3em;
+     margin-left: 20px;
+     margin-bottom: 15px;
+}
+.tgender{
+     color:white;
+     margin-bottom: 15px;
+     font-weight: bold;
+     font-size: 1.3em;
+     margin-left: 20px;
+}
+.tdoor_no{
+     color:white;
+     font-weight: bold;
+     font-size: 1.3em;
+     margin-left: 20px;
+     margin-bottom: 15px;
+}
+.hname{
+     position: absolute;
+     color:orangered;
+     margin-left:35%;
+     margin-top: -25px;
+}
+
+.hfather_name{
+     position: absolute;
+     color:orangered;
+     margin-left:35%;
+     margin-top: -25px;
+}
+.hvoter{
+     position: absolute;
+     color:orangered;
+     margin-left:35%;
+     margin-top: -25px;
+}
+.hgender{
+     position: absolute;
+     color:orangered;
+     margin-left:35%;
+     margin-top: -25px;
+}
+.hdoor_no{
+     position: absolute;
+     color:orangered;
+     margin-left:35%;
+     margin-top: -25px;
+}
+.hage{
+     position: absolute;
+     color:orangered;
+     margin-left:35%;
+     margin-top: -25px;
+}
+
+.success{
+     color:greenyellow;
+     font-weight: bold;
+     font-size: 1.2em;
+     margin-left: 100px;
+}
+
+.wname{
+     position: absolute;
+     color:orangered;
+     margin-left:35%;
+     margin-top: -25px;
+}
+
+.wfather_name{
+     position: absolute;
+     color:orangered;
+     margin-left:35%;
+     margin-top: -25px;
+}
+.wvoter{
+     position: absolute;
+     color:orangered;
+     margin-left:35%;
+     margin-top: -25px;
+}
+.wgender{
+     position: absolute;
+     color:orangered;
+     margin-left:35%;
+     margin-top: -25px;
+}
+.wdoor_no{
+     position: absolute;
+     color:orangered;
+     margin-left:35%;
+     margin-top: -25px;
+}
+.wage{
+     position: absolute;
+     color:orangered;
+     margin-left:35%;
+     margin-top: -25px;
+}

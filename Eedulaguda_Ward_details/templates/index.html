@@ -1,0 +1,156 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>registration</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/index.css' %}">
+    <style type = 'text/css'>
+        body{
+            background-color:#000033;
+        }
+        ul{
+            list-style-type:none;
+            font-size:1.2em;
+            color:black;
+            overflow:hidden;
+            margin-top:-7.8px;
+        }
+        li{
+            float:right;
+            margin-right:4%;
+            padding:13px;
+            display:block;
+            font-size:1em;
+        }
+        li a{
+            color:white;
+            text-decoration:none;
+            text-shadow:0px 0px 1px white,0px 0px 1px white;
+            blur:9px;
+            transition:0.7s;
+        }
+        li a:hover{
+            padding:8px;
+            border-radius:10px;
+            transition:0.7s;
+            border:3px solid white;
+            border-shadow:0px 0px 5px white,0px 0px 5px white;
+        }
+        .active{
+            color:black;
+            padding:6px;
+            background-color:white;
+            border:3px solid white;
+            border-radius:10px;
+            border-shadow:0px 0px 5px black,0px 0px 5px black;
+        }
+    </style>
+</head>
+<body>
+    <div class = 'title'>Miryalaguda voter lists</div><br>
+    <div class = 'wards'>Wards - 1,2,3,4,5 </div><br>
+    <ul>
+        <li><a href='female'>show all</a></li>
+        <li><a href='#' class= 'active'>Add member</a></li>
+        <li><a href='find'>find member</a></li><br><br><hr>
+    </ul>
+    <button class = 'add' id = 'add' onclick ="window.location.href = '/';" hidden>Add User</button>
+    <form action = 'backend' method = 'post' enctype="multipart/form-data" id = 'formid'>
+        {% csrf_token %}
+        <div class = 'form'>
+        <input type = 'text' id ='name' class= 'name' name = 'name' placeholder ='Name' required autofocus><br><br>
+        <input type="radio" class='status' value = 'unmarried' name='status' id="unmarried">
+        <label for='unmarried'>unmarried</label>
+        <input type="radio" class='status' value= 'married' name='status' id="married">
+        <label for='married'>married</label><br><br>
+        <input type = 'text' id ='father_name' class= 'father_name' name = 'father_name' placeholder = 'Father/Husband Name' required><br><br>
+        <input type = 'text' id ='age' class= 'name' name = 'age' placeholder = 'Age' required><br><br>
+        <input type = 'text' id ='door_no' class= 'name' name = 'door_no' placeholder = 'Door number' required><br><br>
+        <input type = 'text' id ='voter_id' class= 'name' name = 'voter_id' placeholder = 'Voter Id' required><br><br>
+        <input type="radio" class='gender' value = 'male' name='gender' id="male">
+        <label for='male'>male</label>
+        <input type="radio" class='gender' value= 'female' name='gender' id="female">
+        <label for='female'>female</label><br><br>
+        <input type = 'submit' id = 'submit' value = 'submit' class = 'submit'>
+        </div>
+    </form>
+    <div class='hidey' id = 'hidey' hidden>
+        <div class='tname'>Name: <div class='hname'></div></div>
+        <div class='tfather_name'>Father Name: <div class='hfather_name'></div> </div>
+        <div class='tage'>Age: <div class='hage'></div></div>
+        <div class ='tdoor_no'>Door N.o: <div class='hdoor_no'></div></div>
+        <div class='tvoter'>Voter Id: <div class='hvoter'></div></div>
+        <div class ='tgender'>Gender: <div class='hgender'></div></div>
+        <div class = 'success'>successfully updated list</div>
+    </div>
+    <div class='hidey' id = 'women' hidden>
+        <div class='tname'>Name: <div class='wname'></div></div>
+        <div class='tfather_name'>Husband: <div class='wfather_name'></div> </div>
+        <div class='tage'>Age: <div class='wage'></div></div>
+        <div class ='tdoor_no'>Door N.o: <div class='wdoor_no'></div></div>
+        <div class='tvoter'>Voter Id: <div class='wvoter'></div></div>
+        <div class ='tgender'>Gender: <div class='wgender'></div></div>
+        <div class = 'success'>successfully updated list</div>
+    </div>
+    <script>
+        $(document).ready(function(){
+            $("input[type='text']").button();
+            $('#male, #female,#married,#unmarried').button();
+            $('form').submit(function(e) {
+                e.preventDefault()
+                var token = '{{csrf_token}}';
+                $.ajax({
+                    async: true,
+                    headers: {
+                        "X-CSRFToken": token
+                    },
+                    type: 'POST',
+                    url: 'backend',
+                    dataType: 'json',
+                    data: {
+                        'name'         :    $('#name').val(),
+                        'father_name'  :    $('#father_name').val(),
+                        'door_no'      :    $('#door_no').val(),
+                        'voter'        :    $('#voter_id').val(),
+                        'gender'       :    $('input[name = gender]:checked').val(),
+                        'status'       :    $('input[name = status]:checked').val(),
+                        'age'          :    $('#age').val(),
+
+                    },
+                    success: function(data) {
+                        if (data =='voter id already exists'){
+                            alert('voter id already exists');
+                        }else if (data.status == 'unmarried'){
+                            $('.hname').text(data.name);
+                            $('.hfather_name').text(data.father);
+                            $('.hdoor_no').text(data.door_no);
+                            $('.hage').text(data.age);
+                            $('.hvoter').text(data.voter);
+                            $('.hgender').text(data.gender);
+                            $('#hidey').show(1000);
+                            $('#add').show(2000);
+                        }else{
+                            $('.wname').text(data.name);
+                            $('.wfather_name').text(data.father);
+                            $('.wdoor_no').text(data.door_no);
+                            $('.wage').text(data.age);
+                            $('.wvoter').text(data.voter);
+                            $('.wgender').text(data.gender);
+                            $('#women').show(1000);
+                            $('#add').show(2000);
+                        }
+                    },
+                    error: function() {
+                        console.log('error in sending');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
